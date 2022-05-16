@@ -100,14 +100,14 @@ body {
     border-radius: 5px; 
 } 
 
-.jogo > .perguntas > ul > li ion-icon { 
+.jogo .perguntas > ul > li ion-icon { 
     width: 40px; 
     height: 40px; 
     color: rgba(51, 51, 51, 1); 
     font-weight: 700;
 }  
 
-.jogo > .perguntas ion-icon:hover { 
+.jogo .perguntas ion-icon:hover { 
     cursor: pointer;
 }
 
@@ -115,19 +115,6 @@ body {
     font-size: 16px; 
     font-weight: 700; 
     color: rgba(51, 51, 51, 1);
-} 
-
-.jogo > .rodape { 
-    width: 100%; 
-    height: 70px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    background-color: rgba(255, 255, 255, 1); 
-    box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.05);
-    position: fixed;  
-    left: 0; 
-    bottom: 0; 
 } 
 
 .perguntas > ul > li > .enunciado { 
@@ -198,13 +185,93 @@ body {
     padding-right: 18px; 
     box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.15);
     border-radius: 5px; 
+    font-weight: 700;
+}   
+
+.perguntas > ul > li > .perguntaRespondida > span#wrong { 
     color: rgba(255, 48, 48, 1); 
     text-decoration: line-through;  
-    font-weight: 700;
 } 
+
+.perguntas > ul > li > .perguntaRespondida > span#maybe { 
+    color: rgba(255, 146, 46, 1); 
+    text-decoration: line-through;  
+} 
+
+.perguntas > ul > li > .perguntaRespondida > span#right { 
+    color: rgba(47, 190, 52, 1); 
+    text-decoration: line-through;  
+}
 
 .perguntas > ul > li > .perguntaRespondida > ion-icon { 
     width: 30px;
     height: 30px; 
+}
+
+.perguntas > ul > li > .perguntaRespondida > ion-icon[name="close-circle"] { 
     color: rgba(255, 48, 48, 1); 
+}  
+
+.perguntas > ul > li > .perguntaRespondida > ion-icon[name="help-circle"] { 
+    color: rgba(255, 146, 46, 1); 
+}  
+
+.perguntas > ul > li > .perguntaRespondida > ion-icon[name="checkmark-circle"] { 
+    color: rgba(47, 190, 52, 1); 
+}  
+
+.container{ 
+    margin-bottom: 100px;
+}
+
+.jogo > .rodape { 
+    width: 100%; 
+    height: 70px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;  
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 1); 
+    box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.05);
+    position: fixed;   
+    font-size: 18px;
+    left: 0; 
+    bottom: 0;  
+    margin-top: 500px;
+}  
+
+.jogo > .rodapeFim { 
+    width: 100%; 
+    height: 171px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;  
+    flex-direction: column;  
+    padding-top: 16px; 
+    padding-bottom: 12px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 1); 
+    box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.05); 
+    position: fixed;  
+    left: 0; 
+    bottom: 0; 
+} 
+
+.jogo > .rodapeFim > a { 
+    font-weight: bold;
+} 
+
+.jogo > .rodapeFim > button { 
+    width: 167px;
+    height: 32px; 
+    background-color: rgba(251, 107, 107, 1);
+    color:rgba(255, 255, 255, 1);
+    font-size: 14px; 
+    font-weight: 400; 
+    border-radius: 5px; 
+    border:rgba(251, 107, 107, 1);
+} 
+
+.jogo > .rodapeFim > button:hover { 
+    cursor: pointer;
 }

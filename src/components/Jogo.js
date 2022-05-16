@@ -1,12 +1,17 @@
-import React from "react"; 
+import React from "react";  
+
+import Rodape from "./Rodape";
 
 function Perguntas(props) {  
     const [clicked, setClicked] = React.useState(true);   
     const [clicked2, setClicked2] = React.useState(true);  
-    const [clicked3, setClicked3] = React.useState(true); 
+    const [clicked3, setClicked3] = React.useState({state: true, opcao: "", contador: 0});  
 
-    console.log(clicked); 
-    console.log(clicked2);
+    let cont=0; 
+
+    function incrementa() {   
+        props.incrementaContador();
+    } 
 
     return(  
         <li> 
@@ -20,21 +25,33 @@ function Perguntas(props) {
                 <span>{props.pergunta}</span> 
                 <ion-icon name="repeat-sharp" onClick = {() => setClicked2(!clicked2)}></ion-icon>
             </div>   
-            ) : clicked3 ? ( 
+            ) : clicked3.state ? ( 
             <div className="enunciado">
                 <span>{props.resposta}</span>   
                 <div className="botoes">
-                    <button id="wrong" onClick={() => setClicked3(!clicked3)}>Não Lembrei</button> 
-                    <button id="maybe" onClick={() => setClicked3(!clicked3)}>Quase Não Lembrei</button> 
-                    <button id="right" onClick={() => setClicked3(!clicked3)}>Zap!</button>
+                    <button id="wrong" onClick={() => setClicked3({state: !clicked3, opcao: "wrong", contador: incrementa()})}>Não Lembrei</button> 
+                    <button id="maybe" onClick={() => setClicked3({state: !clicked3, opcao: "maybe", contador: incrementa()})}>Quase Não Lembrei</button> 
+                    <button id="right" onClick={() => setClicked3({state: !clicked3, opcao: "right", contador: incrementa()})}>Zap!</button>
                 </div>
             </div>   
             ) : (
-                <div className="perguntaRespondida">
-                <span>{props.i}</span>  
-                <ion-icon name="close-circle"></ion-icon> 
-                <ion-icon name="help-circle"></ion-icon>
-                <ion-icon name="checkmark-circle"></ion-icon> 
+                <div className="perguntaRespondida"> 
+                {clicked3.opcao === "wrong" ? ( 
+                    <>
+                    <span id="wrong">{props.i}</span>
+                    <ion-icon name="close-circle"></ion-icon>  
+                    </> 
+                ) : clicked3.opcao === "maybe" ? (  
+                    <> 
+                    <span id="maybe">{props.i}</span>
+                    <ion-icon name="help-circle"></ion-icon>  
+                    </>
+                ) : ( 
+                    <>
+                    <span id="right">{props.i}</span>
+                    <ion-icon name="checkmark-circle"></ion-icon>   
+                    </>
+                ) }
             </div> 
             )}
         </li>   
@@ -52,40 +69,46 @@ export default function Jogo() {
         },
         {
             i:"Pergunta 2", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "O React é __ ", 
+            resposta: "uma biblioteca JavaScript para construção de interfaces"
         }, 
         {
             i:"Pergunta 3", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "Componentes devem iniciar com __", 
+            resposta: " letra maiúscula"
         }, 
         {
             i:"Pergunta 4", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "Podemos colocar __ dentro do JSX", 
+            resposta: "expressões"
         }, 
         {
             i:"Pergunta 5", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "O ReactDOM nos ajuda __ ", 
+            resposta: "interagindo com a DOM para colocar componentes React na mesma"
         }, 
         {
             i:"Pergunta 6", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "Usamos o npm para __ ", 
+            resposta: "gerenciar os pacotes necessários e suas dependências"
         }, 
         {
             i:"Pergunta 7", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "Usamos props para __", 
+            resposta: "passar diferentes informações para componentes "
         }, 
         {
             i:"Pergunta 8", 
-            pergunta: "O que é JSX?", 
-            resposta: "JSX é uma sintaxe para escrever HTML dentro do JS"
+            pergunta: "Usamos estado (state) para __", 
+            resposta: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
         }
-    ]; 
+    ];  
+
+    const [contador,setContador] = React.useState(0); 
+
+    function incrementaContador() { 
+        setContador(() => contador+1); 
+    }
 
     return( 
         <div className="jogo">
@@ -94,20 +117,23 @@ export default function Jogo() {
                 <h3>ZapRecall</h3>
             </div>   
 
+            <div className="container">
             {dados.map((post,index) => (
             <div className="perguntas"> 
                 <ul>
                     <Perguntas  
                         key= {index}
                         i = {post.i} 
-                        pergunta = {post.pergunta}   
+                        pergunta = {post.pergunta} 
+                        incrementaContador = {incrementaContador}  
                         resposta = {post.resposta}  
                     /> 
                 </ul>
             </div> 
-            ))}
+            ))} 
+            </div>
 
-            <div className="rodape">0/4 CONCLUÍDOS</div>
+           <Rodape contador={contador}/>
         </div>
     )
 }
