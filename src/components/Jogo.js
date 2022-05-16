@@ -5,9 +5,7 @@ import Rodape from "./Rodape";
 function Perguntas(props) {  
     const [clicked, setClicked] = React.useState(true);   
     const [clicked2, setClicked2] = React.useState(true);  
-    const [clicked3, setClicked3] = React.useState({state: true, opcao: "", contador: 0});  
-
-    let cont=0; 
+    const [clicked3, setClicked3] = React.useState({state: true, opcao: "", contador: 0});   
 
     function incrementa() {   
         props.incrementaContador();
@@ -104,7 +102,8 @@ export default function Jogo() {
         }
     ];  
 
-    const [contador,setContador] = React.useState(0); 
+    const [contador,setContador] = React.useState(0);  
+    const [estado,setEstado] = React.useState("");
 
     function incrementaContador() { 
         setContador(() => contador+1); 
@@ -125,7 +124,8 @@ export default function Jogo() {
                         key= {index}
                         i = {post.i} 
                         pergunta = {post.pergunta} 
-                        incrementaContador = {incrementaContador}  
+                        incrementaContador = {incrementaContador}   
+                        estado ={estado}
                         resposta = {post.resposta}  
                     /> 
                 </ul>
@@ -133,7 +133,7 @@ export default function Jogo() {
             ))} 
             </div>
 
-           <Rodape contador={contador}/>
+           <Rodape contador={contador} estado={estado}/>
         </div>
     )
 }

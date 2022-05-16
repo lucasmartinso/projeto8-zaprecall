@@ -261,7 +261,7 @@ body {
     font-weight: bold;
 } 
 
-.jogo > .rodapeFim > button { 
+.jogo > .rodapeFim  button { 
     width: 167px;
     height: 32px; 
     background-color: rgba(251, 107, 107, 1);
@@ -272,6 +272,6 @@ body {
     border:rgba(251, 107, 107, 1);
 } 
 
-.jogo > .rodapeFim > button:hover { 
+.jogo > .rodapeFim button:hover { 
     cursor: pointer;
 }
